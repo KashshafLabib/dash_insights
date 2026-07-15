@@ -1,0 +1,60 @@
+{
+  "$comment": "Single source of truth for multilingual scoring rules. Consumed by the TypeScript runtime (upload pipeline) and the Python offline pipeline. Patterns are matched case-insensitively as plain substrings unless noted.",
+  "brands": {
+    "primary": { "name": "TakaPay", "patterns": ["takapay"] },
+    "competitor": { "name": "NgoodPay", "patterns": ["ngoodpay"] }
+  },
+  "sentimentCues": {
+    "negative": [
+      "কেটে নিয়েছে", "হেল্প নেই", "রিচার্জ হয়নি", "পৌঁছায়নি", "টাকা যায়নি",
+      "pending", "atke ache", "pay nai", "katlo", "robbery", "response nai",
+      "dhorlo na", "keu dhorlo", "fail holo", "crash", "kaj korche na",
+      "asche na", "switch korlam", "khuje pai na", "takapay e nai", "onek kom",
+      "wait korlam", "hoy nai", "problem", "ekhono asheni", "scam", "fraud",
+      "worst", "terrible", "hoyni"
+    ],
+    "positive": [
+      "সাথে সাথে চলে গেল", "smooth", "impressed", "darun", "cashback pelam",
+      "bachlo", "never failed", "love it", "saved me", "fire pelam",
+      "regular user", "solve kore dilo", "under a minute", "done before i finished",
+      "genuinely", "kaje lage", "valo", "best", "easy", "excellent", "great"
+    ],
+    "neutral": [
+      "kothay pabo", "keu jane", "can i", "keu try koreche", "offer jano",
+      "kivabe", "how do i", "ache keu", "?"
+    ]
+  },
+  "templateNormalization": [
+    { "pattern": "\\d+", "replace": "N" },
+    { "pattern": "Grameenphone|Banglalink|Teletalk|Robi|Airtel", "replace": "OP" },
+    { "pattern": "Farmgate|Dhanmondi|Mirpur|Uttara|Gulshan|Banani|Motijheel|Mohakhali|Badda|Khilgaon", "replace": "LOC", "ignoreCase": true },
+    { "pattern": "bhai|bon|ma|baba|friend|colleague|landlord|amar", "replace": "REL" },
+    { "pattern": "electricity|gas|internet|water|credit card|tuition|DPDC|DESCO", "replace": "BILL" }
+  ],
+  "templateConsensus": { "minRows": 4, "minShare": 0.75 },
+  "topics": [
+    { "topic": "failed_transaction", "patterns": ["রিচার্জ হয়নি", "কেটে নিয়েছে", "পৌঁছায়নি", "pending", "atke ache", "pay nai", "katlo", "fail holo", "টাকা যায়নি", "ekhono asheni"] },
+    { "topic": "app_crash", "patterns": ["crash", "hang", "kaj korche na", "khulche na"] },
+    { "topic": "login_otp", "patterns": ["otp", "login", "code asche na"] },
+    { "topic": "charges_fees", "patterns": ["charging", "charge", "fee besi", "cash out korte"] },
+    { "topic": "customer_care", "patterns": ["customer care", "helpline", "call dhorlo", "support"] },
+    { "topic": "cashback_offer", "patterns": ["cashback", "ক্যাশব্যাক", "bonus", "offer"] },
+    { "topic": "agent_network", "patterns": ["agent"] },
+    { "topic": "bill_payment", "patterns": ["bill", "বিল", "tuition", "fee dilam", "dpdc", "desco"] },
+    { "topic": "send_money", "patterns": ["পাঠালাম", "পাঠিয়েছি", "pathalam", "send money", "taka pathai"] },
+    { "topic": "recharge", "patterns": ["recharge", "রিচার্জ"] },
+    { "topic": "feature_query", "patterns": ["can i", "kivabe", "how do i", "possible"] }
+  ],
+  "competitorThemes": [
+    { "theme": "Lower cash-out charges", "patterns": ["charge"] },
+    { "theme": "Better cashback / bonus", "patterns": ["cashback", "bonus"] },
+    { "theme": "More agents nearby", "patterns": ["agent"] },
+    { "theme": "Faster app", "patterns": ["faster"] },
+    { "theme": "Better customer care", "patterns": ["customer care"] },
+    { "theme": "Explicitly switching", "patterns": ["switch"] }
+  ],
+  "banglishMarkers": [
+    "korlam", "hoye", "taka", "diye", "gelo", "ache", "nai", "kore", "amar",
+    "keu", "ekhono", "theke", "dhore", "pelam", "dilam", "bhai", "kothay"
+  ]
+}
