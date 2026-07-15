@@ -54,6 +54,15 @@ describe("column mapping for bring-your-own data", () => {
   });
 });
 
+describe("timestamp normalization", () => {
+  it("keeps naive timestamps naive (no timezone shift across dates)", async () => {
+    const { normalizeTimestamp } = await import("./normalize");
+    expect(normalizeTimestamp("2026-06-21 01:16:00")).toBe("2026-06-21T01:16:00");
+    expect(normalizeTimestamp("2026-06-21")).toBe("2026-06-21T00:00:00");
+    expect(normalizeTimestamp("garbage")).toBeNull();
+  });
+});
+
 describe("language detection", () => {
   it("detects Bangla script", () => {
     expect(detectLanguage("আমার একাউন্ট থেকে টাকা কেটে নিয়েছে")).toBe("bn");

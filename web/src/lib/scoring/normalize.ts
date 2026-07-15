@@ -51,6 +51,10 @@ export function normalizeSentiment(value: unknown): Sentiment | null {
 export function normalizeTimestamp(value: unknown): string | null {
   if (value === null || value === undefined || value === "") return null;
   const s = String(value).trim().replace(" ", "T");
+  // Naive local timestamps stay naive — converting through Date/toISOString
+  // would shift them across date boundaries (the source data has no timezone).
+  const naive = s.match(/^(\d{4}-\d{2}-\d{2})(?:T(\d{2}:\d{2}(?::\d{2})?))?/);
+  if (naive) return naive[2] ? `${naive[1]}T${naive[2].length === 5 ? `${naive[2]}:00` : naive[2]}` : `${naive[1]}T00:00:00`;
   const d = new Date(s);
   return Number.isNaN(d.getTime()) ? null : d.toISOString().slice(0, 19);
 }
