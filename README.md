@@ -1,6 +1,6 @@
 # TakaPay Pulse
 
-**Live demo → [dash-insights.vercel.app](https://dash-insights.vercel.app)** · **Video walkthrough → [Loom (3 min)](https://www.loom.com/share/56dcf7bb322e4e3198438239cb4df1f6)**
+**Live demo → [dash-insights.vercel.app](https://dash-insights.vercel.app)** · **Video walkthrough → [Loom](https://www.loom.com/share/56dcf7bb322e4e3198438239cb4df1f6)**
 
 A dashboard that turns 660 messy, multilingual social-media posts about the mobile wallet **TakaPay** into something a brand manager can read in two minutes and act on the same day. It cleans the data before showing it, explains every chart in plain language, answers questions in a built-in chat — and works with your own CSV/JSON, not just the sample.
 
