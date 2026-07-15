@@ -72,7 +72,7 @@ Two judges must agree before anything changes — a deliberately cautious bar, b
 | **Daily trend** | 28 of 30 days were net-negative; the worst day (June 12, −54%) is marked. Check back after a fix ships to see if it moved. |
 | **Language lens** | English posts are 63% positive; Banglish posts are 65% negative. If your monitoring is English-only, you are reading the 20% of the feed that's happiest. |
 | **Posts explorer** | The receipts. Every chart drills down to real posts in their original language, with corrected labels marked "was positive →". |
-| **"Ask the data" chat** | Type "what should we fix first?" and get the answer in a sentence — computed from the audited numbers, so it can't make figures up. |
+| **"Ask the data" chat** | Ask anything, in English or Bangla — "compare Facebook and TikTok on failed transactions", "what should we fix first?". Answers come from a free-tier LLM that is only allowed to use the audited numbers and real posts; if the LLM is ever unavailable, a deterministic engine computed from the same numbers takes over automatically. |
 | **Filters** | Slice everything by topic, sentiment, platform, language or date — all charts recompute instantly. |
 
 ![Chat answering "what should we fix first"](assets/chat.png)
@@ -113,7 +113,7 @@ The audited numbers for the sample dataset are **precomputed and bundled with th
 | Require 2 of 3 judges to agree | Trust the ML model alone | The model hedges on Banglish. A wrong "correction" destroys trust in the whole tool, so precision beats recall here. |
 | Heavy ML offline only; deterministic rules in production | Run the transformer on the server | No free host runs a 1.1 GB model (HF Spaces dropped free Docker hosting in 2026). Precomputing gives the same quality for the sample data at zero cost and zero cold-start risk. |
 | One Next.js deploy, TypeScript API routes | Separate Python/FastAPI backend | At 660 rows the backend was just parsing and counting — not worth a second service that can cold-start for 50 s during review. Python still does the heavy analysis, offline, where it's strongest. |
-| Deterministic chat engine by default | LLM-powered chat | The chat answers a brand manager's questions from computed aggregates, so it *cannot* invent numbers. An optional free-tier LLM (Groq/Gemini) upgrades it via one env var — but the demo doesn't depend on anyone's API quota staying alive. |
+| Deterministic chat engine as the floor, LLM on top | LLM-only chat | A chatbot that misquotes numbers to a brand manager is a liability. The live demo uses a free-tier LLM (Groq) that is grounded in the audited aggregates, a topic×platform table and retrieved real posts — and if the free quota ever dies mid-review, the deterministic engine answers from the same numbers instead of the chat breaking. |
 | Engagement as a tie-breaker, not a headline | Rank issues by reactions | Reactions in this dataset are uniform random noise (0–500, zero correlation with anything) — real engagement is heavy-tailed. Treating synthetic numbers as signal would be pretending. |
 
 ---

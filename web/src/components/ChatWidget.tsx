@@ -35,11 +35,12 @@ export function ChatWidget({ insights, isDefaultData }: { insights: Insights; is
     setInput("");
     setBusy(true);
     try {
+      const history = messages.slice(-6);
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // Uploaded datasets carry their own numbers; the default is bundled server-side.
-        body: JSON.stringify(isDefaultData ? { message } : { message, insights }),
+        body: JSON.stringify(isDefaultData ? { message, history } : { message, history, insights }),
       });
       const data = await res.json();
       setMessages((m) => [...m, { role: "assistant", text: data.reply ?? data.error ?? "Something went wrong." }]);
@@ -63,7 +64,7 @@ export function ChatWidget({ insights, isDefaultData }: { insights: Insights; is
       </button>
 
       {open && (
-        <div className="fixed bottom-20 right-5 z-40 flex h-[520px] w-[380px] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-hairline bg-surface shadow-xl">
+        <div className="fixed bottom-20 right-5 z-40 flex h-130 w-95 max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-hairline bg-surface shadow-xl">
           <div className="border-b border-hairline px-4 py-3">
             <div className="text-sm font-semibold">Ask the data</div>
             <div className="text-xs text-ink-2">Plain-language answers from the audited numbers — no made-up figures.</div>

@@ -1,4 +1,28 @@
-import type { Insights } from "../types";
+import type { Insights, Post } from "../types";
+
+export interface HistoryMessage {
+  role: "user" | "assistant";
+  text: string;
+}
+
+/** Keyword-overlap retrieval: the posts most relevant to the question. */
+export function relevantPosts(message: string, posts: Post[], limit = 6): Post[] {
+  const words = message
+    .toLowerCase()
+    .split(/[^\p{L}\d]+/u)
+    .filter((w) => w.length > 2);
+  if (words.length === 0) return [];
+  return posts
+    .filter((p) => p.inScope)
+    .map((p) => {
+      const t = `${p.text} ${p.topic} ${p.platform}`.toLowerCase();
+      return { p, score: words.filter((w) => t.includes(w)).length };
+    })
+    .filter((r) => r.score > 0)
+    .sort((a, b) => b.score - a.score || b.p.reactions - a.p.reactions)
+    .slice(0, limit)
+    .map((r) => r.p);
+}
 
 /**
  * Optional free-tier LLM upgrade for the chat. Works with any OpenAI-compatible
@@ -36,9 +60,38 @@ function digest(i: Insights): string {
   });
 }
 
-export async function llmAnswer(message: string, insights: Insights): Promise<string | null> {
+/** topic × platform negative-post counts, so "compare X and Y on Z" gets real numbers. */
+export function topicPlatformCrosstab(posts: Post[]): Record<string, Record<string, number>> {
+  const out: Record<string, Record<string, number>> = {};
+  for (const p of posts) {
+    if (!p.inScope || p.sentiment !== "negative") continue;
+    out[p.topic] ??= {};
+    out[p.topic][p.platform] = (out[p.topic][p.platform] ?? 0) + 1;
+  }
+  return out;
+}
+
+export async function llmAnswer(
+  message: string,
+  insights: Insights,
+  history: HistoryMessage[] = [],
+  examples: Post[] = [],
+  crosstab?: Record<string, Record<string, number>>,
+): Promise<string | null> {
   const baseUrl = process.env.LLM_BASE_URL ?? "https://api.groq.com/openai/v1";
   const model = process.env.LLM_MODEL ?? "llama-3.3-70b-versatile";
+  const posts = examples.length
+    ? "\nRELEVANT POSTS (real examples you may quote): " +
+      JSON.stringify(
+        examples.map((p) => ({
+          text: p.text,
+          platform: p.platform,
+          date: p.timestamp?.slice(0, 10),
+          sentiment: p.sentiment,
+          topic: p.topic,
+        })),
+      )
+    : "";
   try {
     const res = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
@@ -55,10 +108,13 @@ export async function llmAnswer(message: string, insights: Insights): Promise<st
             role: "system",
             content:
               "You are a friendly analyst helping a non-technical brand manager understand their social media data. " +
-              "Answer ONLY from the JSON insights below — never invent numbers. Keep answers short (2-4 sentences), " +
-              "plain-language, and end with the single most actionable takeaway when relevant. " +
-              `INSIGHTS: ${digest(insights)}`,
+              "Answer ONLY from the JSON below — never invent numbers or posts. Keep answers short (2-4 sentences " +
+              "unless the question genuinely needs more), plain-language, and end with the single most actionable " +
+              "takeaway when relevant. Answer in the language the user writes in. " +
+              `INSIGHTS: ${digest(insights)}${posts}` +
+              (crosstab ? `\nNEGATIVE POSTS BY TOPIC AND PLATFORM: ${JSON.stringify(crosstab)}` : ""),
           },
+          ...history.slice(-6).map((m) => ({ role: m.role, content: m.text })),
           { role: "user", content: message },
         ],
       }),
