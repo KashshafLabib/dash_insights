@@ -1,0 +1,13 @@
+{
+  "total_rows": 660,
+  "labels_corrected": 64,
+  "duplicate_texts": 10,
+  "off_topic": 61,
+  "no_brand_mention": 70,
+  "in_scope": 589,
+  "judges_used": [
+    "judge_template",
+    "judge_cues",
+    "judge_model"
+  ]
+}
