@@ -36,8 +36,11 @@ export function llmEnabled(): boolean {
   return Boolean(process.env.LLM_API_KEY);
 }
 
+const asPct = (n: number) => `${n > 0 ? "+" : ""}${Math.round(n * 100)}%`;
+
 function digest(i: Insights): string {
   const s = i.sentiment;
+  const total = Math.max(s.audited.negative + s.audited.neutral + s.audited.positive, 1);
   return JSON.stringify({
     brand: i.meta.brand,
     competitor: i.meta.competitor,
@@ -50,13 +53,32 @@ function digest(i: Insights): string {
       off_topic: i.audit.offTopic,
       example_fix: i.audit.examples[0] ?? null,
     },
-    sentiment_audited: s.audited,
-    net_sentiment: { raw: s.netRaw, audited: s.netAudited },
-    topics: i.topics.map((t) => ({ topic: t.topic, posts: t.posts, negative: t.negative, priority: t.priority })),
+    sentiment_audited: {
+      ...s.audited,
+      negative_share: asPct(s.audited.negative / total),
+      positive_share: asPct(s.audited.positive / total),
+    },
+    net_sentiment: {
+      raw_labels_claimed: asPct(s.netRaw),
+      after_audit: asPct(s.netAudited),
+      meaning: "percentage of positive posts minus percentage of negative posts",
+    },
+    topics: i.topics.map((t) => ({
+      topic: t.topic,
+      posts: t.posts,
+      negative: t.negative,
+      negative_share: asPct(t.negShare),
+      priority: t.priority,
+    })),
     competitor_view: { mentions: i.competitor.mentions, themes: i.competitor.themes },
     languages: i.languages,
     platforms: i.platforms.map((p) => ({ platform: p.key, posts: p.posts, negative: p.negative, positive: p.positive })),
-    worst_day: i.trend.length ? i.trend.reduce((w, r) => (r.net < w.net ? r : w)) : null,
+    worst_day: i.trend.length
+      ? (() => {
+          const w = i.trend.reduce((a, r) => (r.net < a.net ? r : a));
+          return { date: w.date, net_sentiment: asPct(w.net), posts: w.posts };
+        })()
+      : null,
   });
 }
 
@@ -108,9 +130,11 @@ export async function llmAnswer(
             role: "system",
             content:
               "You are a friendly analyst helping a non-technical brand manager understand their social media data. " +
-              "Answer ONLY from the JSON below — never invent numbers or posts. Keep answers short (2-4 sentences " +
-              "unless the question genuinely needs more), plain-language, and end with the single most actionable " +
-              "takeaway when relevant. Answer in the language the user writes in. " +
+              "Answer ONLY from the JSON below — never invent numbers or posts. Speak like a human, not a data file: " +
+              "use the pre-formatted percentages as-is (say '−22%', never '-0.221'), round big numbers naturally, and " +
+              "give one short clause of context for what a figure means (e.g. 'net sentiment −22% — negative posts far " +
+              "outweigh positive'). Keep answers short (2-4 sentences unless the question genuinely needs more) and end " +
+              "with the single most actionable takeaway when relevant. Answer in the language the user writes in. " +
               `INSIGHTS: ${digest(insights)}${posts}` +
               (crosstab ? `\nNEGATIVE POSTS BY TOPIC AND PLATFORM: ${JSON.stringify(crosstab)}` : ""),
           },
