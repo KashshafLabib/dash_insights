@@ -1,0 +1,10 @@
+# Offline analysis only — none of this ships to production.
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.8
+seaborn>=0.13
+jupyter>=1.0
+
+# Multilingual sentiment audit (heavy; used once, offline)
+transformers>=4.40
+torch>=2.2
