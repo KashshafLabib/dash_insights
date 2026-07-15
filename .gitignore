@@ -2,6 +2,8 @@
 task.md
 plan.md
 *.docx
+CLAUDE.md
+AGENTS.md
 
 # node / next.js
 node_modules/
