@@ -1,0 +1,594 @@
+{
+  "meta": {
+    "source": "takapay_sample_data.csv",
+    "brand": "TakaPay",
+    "competitor": "NgoodPay",
+    "totalRows": 660,
+    "from": "2026-06-01",
+    "to": "2026-06-30",
+    "generatedAt": "2026-07-15T09:23:57+00:00",
+    "judges": [
+      "template consensus",
+      "multilingual cues",
+      "xlm-roberta transformer"
+    ]
+  },
+  "audit": {
+    "totalRows": 660,
+    "duplicates": 10,
+    "offTopic": 61,
+    "noBrandMention": 70,
+    "labelsCorrected": 63,
+    "inScope": 589,
+    "examples": [
+      {
+        "id": "1566",
+        "text": "1500 taka TakaPay theke katlo but receiver pay nai. 1 week dhore atke ache.",
+        "platform": "Facebook",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 94
+      },
+      {
+        "id": "1176",
+        "text": "TakaPay app barbar crash korche, credit card bill dite partesi na. Worst timing.",
+        "platform": "Reddit",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 94
+      },
+      {
+        "id": "1587",
+        "text": "2000 taka TakaPay theke katlo but receiver pay nai. 4 din dhore atke ache.",
+        "platform": "Facebook",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 93
+      },
+      {
+        "id": "1118",
+        "text": "10000 taka TakaPay theke katlo but receiver pay nai. 24 ghonta dhore atke ache.",
+        "platform": "News/Media",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 93
+      },
+      {
+        "id": "1108",
+        "text": "আমার একাউন্ট থেকে 1500 টাকা কেটে নিয়েছে কিন্তু Teletalk রিচার্জ হয়নি। TakaPay এর কোনো হেল্প নেই।",
+        "platform": "Reddit",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 92
+      },
+      {
+        "id": "1569",
+        "text": "1000 taka TakaPay theke katlo but receiver pay nai. 2 ghonta dhore atke ache.",
+        "platform": "Twitter",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 92
+      },
+      {
+        "id": "1219",
+        "text": "TakaPay helpline e 45 min wait korlam, keu dhorlo na.",
+        "platform": "Facebook",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 91
+      },
+      {
+        "id": "1481",
+        "text": "800 taka TakaPay theke katlo but receiver pay nai. 2 din dhore atke ache.",
+        "platform": "Reddit",
+        "original": "positive",
+        "corrected": "negative",
+        "score": 91
+      }
+    ]
+  },
+  "sentiment": {
+    "raw": {
+      "negative": 338,
+      "neutral": 85,
+      "positive": 237
+    },
+    "audited": {
+      "negative": 332,
+      "neutral": 55,
+      "positive": 202
+    },
+    "netRaw": -0.153,
+    "netAudited": -0.221
+  },
+  "topics": [
+    {
+      "topic": "failed_transaction",
+      "posts": 215,
+      "negative": 211,
+      "neutral": 0,
+      "positive": 4,
+      "negShare": 0.9814,
+      "priority": 216.23,
+      "medianReactions": 248
+    },
+    {
+      "topic": "charges_fees",
+      "posts": 30,
+      "negative": 30,
+      "neutral": 0,
+      "positive": 0,
+      "negShare": 1.0,
+      "priority": 28.64,
+      "medianReactions": 231.0
+    },
+    {
+      "topic": "app_crash",
+      "posts": 9,
+      "negative": 9,
+      "neutral": 0,
+      "positive": 0,
+      "negShare": 1.0,
+      "priority": 11.01,
+      "medianReactions": 296
+    },
+    {
+      "topic": "customer_care",
+      "posts": 13,
+      "negative": 5,
+      "neutral": 0,
+      "positive": 8,
+      "negShare": 0.3846,
+      "priority": 3.6,
+      "medianReactions": 174
+    },
+    {
+      "topic": "login_otp",
+      "posts": 9,
+      "negative": 8,
+      "neutral": 0,
+      "positive": 1,
+      "negShare": 0.8889,
+      "priority": 3.21,
+      "medianReactions": 97
+    },
+    {
+      "topic": "cashback_offer",
+      "posts": 63,
+      "negative": 3,
+      "neutral": 0,
+      "positive": 60,
+      "negShare": 0.0476,
+      "priority": 2.88,
+      "medianReactions": 232
+    },
+    {
+      "topic": "bill_payment",
+      "posts": 24,
+      "negative": 1,
+      "neutral": 0,
+      "positive": 23,
+      "negShare": 0.0417,
+      "priority": 1.25,
+      "medianReactions": 302.5
+    },
+    {
+      "topic": "app_experience",
+      "posts": 2,
+      "negative": 1,
+      "neutral": 0,
+      "positive": 1,
+      "negShare": 0.5,
+      "priority": 0.21,
+      "medianReactions": 50.0
+    },
+    {
+      "topic": "send_money",
+      "posts": 50,
+      "negative": 0,
+      "neutral": 0,
+      "positive": 50,
+      "negShare": 0.0,
+      "priority": 0.0,
+      "medianReactions": 238.0
+    },
+    {
+      "topic": "recharge",
+      "posts": 47,
+      "negative": 0,
+      "neutral": 0,
+      "positive": 47,
+      "negShare": 0.0,
+      "priority": 0.0,
+      "medianReactions": 219
+    },
+    {
+      "topic": "agent_network",
+      "posts": 26,
+      "negative": 0,
+      "neutral": 26,
+      "positive": 0,
+      "negShare": 0.0,
+      "priority": 0.0,
+      "medianReactions": 328.0
+    },
+    {
+      "topic": "feature_query",
+      "posts": 18,
+      "negative": 0,
+      "neutral": 18,
+      "positive": 0,
+      "negShare": 0.0,
+      "priority": 0.0,
+      "medianReactions": 194.5
+    },
+    {
+      "topic": "product_news",
+      "posts": 2,
+      "negative": 0,
+      "neutral": 2,
+      "positive": 0,
+      "negShare": 0.0,
+      "priority": 0.0,
+      "medianReactions": 280.5
+    }
+  ],
+  "trend": [
+    {
+      "date": "2026-06-01",
+      "posts": 16,
+      "negative": 10,
+      "neutral": 1,
+      "positive": 5,
+      "net": -0.312
+    },
+    {
+      "date": "2026-06-02",
+      "posts": 18,
+      "negative": 9,
+      "neutral": 2,
+      "positive": 7,
+      "net": -0.111
+    },
+    {
+      "date": "2026-06-03",
+      "posts": 21,
+      "negative": 11,
+      "neutral": 1,
+      "positive": 9,
+      "net": -0.095
+    },
+    {
+      "date": "2026-06-04",
+      "posts": 19,
+      "negative": 12,
+      "neutral": 1,
+      "positive": 6,
+      "net": -0.316
+    },
+    {
+      "date": "2026-06-05",
+      "posts": 12,
+      "negative": 6,
+      "neutral": 2,
+      "positive": 4,
+      "net": -0.167
+    },
+    {
+      "date": "2026-06-06",
+      "posts": 24,
+      "negative": 13,
+      "neutral": 1,
+      "positive": 10,
+      "net": -0.125
+    },
+    {
+      "date": "2026-06-07",
+      "posts": 16,
+      "negative": 9,
+      "neutral": 1,
+      "positive": 6,
+      "net": -0.188
+    },
+    {
+      "date": "2026-06-08",
+      "posts": 18,
+      "negative": 12,
+      "neutral": 1,
+      "positive": 5,
+      "net": -0.389
+    },
+    {
+      "date": "2026-06-09",
+      "posts": 21,
+      "negative": 9,
+      "neutral": 4,
+      "positive": 8,
+      "net": -0.048
+    },
+    {
+      "date": "2026-06-10",
+      "posts": 17,
+      "negative": 6,
+      "neutral": 3,
+      "positive": 8,
+      "net": 0.118
+    },
+    {
+      "date": "2026-06-11",
+      "posts": 24,
+      "negative": 16,
+      "neutral": 2,
+      "positive": 6,
+      "net": -0.417
+    },
+    {
+      "date": "2026-06-12",
+      "posts": 24,
+      "negative": 18,
+      "neutral": 1,
+      "positive": 5,
+      "net": -0.542
+    },
+    {
+      "date": "2026-06-13",
+      "posts": 17,
+      "negative": 12,
+      "neutral": 2,
+      "positive": 3,
+      "net": -0.529
+    },
+    {
+      "date": "2026-06-14",
+      "posts": 17,
+      "negative": 8,
+      "neutral": 4,
+      "positive": 5,
+      "net": -0.176
+    },
+    {
+      "date": "2026-06-15",
+      "posts": 21,
+      "negative": 13,
+      "neutral": 1,
+      "positive": 7,
+      "net": -0.286
+    },
+    {
+      "date": "2026-06-16",
+      "posts": 20,
+      "negative": 10,
+      "neutral": 3,
+      "positive": 7,
+      "net": -0.15
+    },
+    {
+      "date": "2026-06-17",
+      "posts": 22,
+      "negative": 11,
+      "neutral": 1,
+      "positive": 10,
+      "net": -0.045
+    },
+    {
+      "date": "2026-06-18",
+      "posts": 28,
+      "negative": 15,
+      "neutral": 4,
+      "positive": 9,
+      "net": -0.214
+    },
+    {
+      "date": "2026-06-19",
+      "posts": 21,
+      "negative": 13,
+      "neutral": 3,
+      "positive": 5,
+      "net": -0.381
+    },
+    {
+      "date": "2026-06-20",
+      "posts": 14,
+      "negative": 8,
+      "neutral": 1,
+      "positive": 5,
+      "net": -0.214
+    },
+    {
+      "date": "2026-06-21",
+      "posts": 20,
+      "negative": 11,
+      "neutral": 3,
+      "positive": 6,
+      "net": -0.25
+    },
+    {
+      "date": "2026-06-22",
+      "posts": 14,
+      "negative": 6,
+      "neutral": 1,
+      "positive": 7,
+      "net": 0.071
+    },
+    {
+      "date": "2026-06-23",
+      "posts": 25,
+      "negative": 14,
+      "neutral": 2,
+      "positive": 9,
+      "net": -0.2
+    },
+    {
+      "date": "2026-06-24",
+      "posts": 19,
+      "negative": 12,
+      "neutral": 2,
+      "positive": 5,
+      "net": -0.368
+    },
+    {
+      "date": "2026-06-25",
+      "posts": 23,
+      "negative": 12,
+      "neutral": 3,
+      "positive": 8,
+      "net": -0.174
+    },
+    {
+      "date": "2026-06-26",
+      "posts": 21,
+      "negative": 12,
+      "neutral": 2,
+      "positive": 7,
+      "net": -0.238
+    },
+    {
+      "date": "2026-06-27",
+      "posts": 23,
+      "negative": 15,
+      "neutral": 1,
+      "positive": 7,
+      "net": -0.348
+    },
+    {
+      "date": "2026-06-28",
+      "posts": 17,
+      "negative": 10,
+      "neutral": 0,
+      "positive": 7,
+      "net": -0.176
+    },
+    {
+      "date": "2026-06-29",
+      "posts": 21,
+      "negative": 11,
+      "neutral": 1,
+      "positive": 9,
+      "net": -0.095
+    },
+    {
+      "date": "2026-06-30",
+      "posts": 16,
+      "negative": 8,
+      "neutral": 1,
+      "positive": 7,
+      "net": -0.062
+    }
+  ],
+  "platforms": [
+    {
+      "key": "Facebook",
+      "posts": 196,
+      "negative": 112,
+      "neutral": 20,
+      "positive": 64
+    },
+    {
+      "key": "Reddit",
+      "posts": 75,
+      "negative": 50,
+      "neutral": 1,
+      "positive": 24
+    },
+    {
+      "key": "News/Media",
+      "posts": 72,
+      "negative": 37,
+      "neutral": 9,
+      "positive": 26
+    },
+    {
+      "key": "Instagram",
+      "posts": 68,
+      "negative": 33,
+      "neutral": 10,
+      "positive": 25
+    },
+    {
+      "key": "YouTube",
+      "posts": 63,
+      "negative": 34,
+      "neutral": 5,
+      "positive": 24
+    },
+    {
+      "key": "TikTok",
+      "posts": 58,
+      "negative": 38,
+      "neutral": 5,
+      "positive": 15
+    },
+    {
+      "key": "Twitter",
+      "posts": 57,
+      "negative": 28,
+      "neutral": 5,
+      "positive": 24
+    }
+  ],
+  "languages": [
+    {
+      "key": "bn-en",
+      "posts": 324,
+      "negative": 211,
+      "neutral": 35,
+      "positive": 78
+    },
+    {
+      "key": "bn",
+      "posts": 153,
+      "negative": 90,
+      "neutral": 9,
+      "positive": 54
+    },
+    {
+      "key": "en",
+      "posts": 112,
+      "negative": 31,
+      "neutral": 11,
+      "positive": 70
+    }
+  ],
+  "competitor": {
+    "mentions": 81,
+    "sentiment": {
+      "negative": 64,
+      "neutral": 9,
+      "positive": 8
+    },
+    "themes": [
+      {
+        "theme": "Lower cash-out charges",
+        "count": 31
+      },
+      {
+        "theme": "Better cashback / bonus",
+        "count": 30
+      },
+      {
+        "theme": "More agents nearby",
+        "count": 13
+      },
+      {
+        "theme": "Faster app",
+        "count": 13
+      },
+      {
+        "theme": "Explicitly switching",
+        "count": 9
+      },
+      {
+        "theme": "Better customer care",
+        "count": 7
+      }
+    ],
+    "samples": [
+      "NgoodPay notun 500 taka cashback offer diyeche, keu try koreche?",
+      "Grameenphone recharge NgoodPay diye korle 500 e extra bonus, TakaPay e nai.",
+      "Motijheel e NgoodPay agent beshi, TakaPay agent khuje pai na.",
+      "Mohakhali e NgoodPay agent beshi, TakaPay agent khuje pai na.",
+      "baba bollo NgoodPay er customer care TakaPay er cheye onek valo.",
+      "NgoodPay app ta ekhon TakaPay theke faster mone hoche, Bashundhara eo kaj kore."
+    ]
+  }
+}
