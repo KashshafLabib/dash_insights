@@ -1,6 +1,7 @@
 # local task docs (not part of the product)
 task.md
 plan.md
+loom-script.md
 *.docx
 CLAUDE.md
 AGENTS.md
