@@ -1,0 +1,27 @@
+# local task docs (not part of the product)
+task.md
+plan.md
+*.docx
+
+# node / next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# env & deploy
+.env
+.env.*
+.vercel/
+
+# os / editor
+.DS_Store
+Thumbs.db
