@@ -92,13 +92,13 @@ Click **Upload your data** and drop any CSV or JSON (≤4 MB / 20k rows). Only a
 ```mermaid
 flowchart TB
     subgraph offline["Offline analysis (Python — runs once, never in production)"]
-        NB["eda.ipynb\nfull exploration + figures"] --> PIPE["pipeline.py\n3-judge audit incl. XLM-RoBERTa"]
-        PIPE --> JSON["insights.json + posts.json\n(precomputed, committed)"]
+        NB["eda.ipynb<br/>full exploration + figures"] --> PIPE["pipeline.py<br/>3-judge audit incl. XLM-RoBERTa"]
+        PIPE --> JSON["insights.json + posts.json<br/>(precomputed, committed)"]
     end
     subgraph vercel["One Vercel deploy (Next.js + TypeScript)"]
-        JSON --> PAGE["Dashboard\nprerendered static — instant load"]
-        API["API routes\n/upload · /chat · /insights"] --> PAGE
-        RULES["rules.json\nshared lexicon & topic rules"] --> API
+        JSON --> PAGE["Dashboard<br/>prerendered static — instant load"]
+        API["API routes<br/>/upload · /chat · /insights"] --> PAGE
+        RULES["rules.json<br/>shared lexicon & topic rules"] --> API
     end
     RULES -.-> PIPE
 ```
